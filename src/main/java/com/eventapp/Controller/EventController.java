@@ -30,6 +30,7 @@ public class EventController {
         model.addAttribute("eventRegistration", new EventRegistration());
         return "index";
     }
+    //this is registration
 
     @GetMapping("/register")
     public String signupPage() {
