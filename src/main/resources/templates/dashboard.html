@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/2037/2037551.png">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Event Registration System</title>
+</head>
+
+<style>
+    .navbar-brand {
+        color: white !important;
+        font-weight: bold;
+    }
+    table{
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    }
+</style>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-light bg-success">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fa fa-calendar" aria-hidden="true"></i> Event Registration System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container-fluid">
+            <div class="table-responsive mt-5">
+                <table class="table table-bordered">
+                    <thead class="bg-success text-white">
+                        <th>SI.No</th>
+                        <th>Event Name</th>
+                        <th>Date and Time</th>
+                        <th>Address</th>
+                        <th>Organizer Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Ticket Type</th>
+                        <th>Ticket Price</th>
+                        <th>Ticket Quantity</th>
+                        <th>Total Price</th>
+                        <th>Payment Method</th>
+                    </thead>
+                    <tbody>
+                        <tr th:each="event, iterStat : ${events}">
+                            <td th:text="${iterStat.count}"></td>
+                            <td th:text="${event.eventName}"></td>
+                            <td th:text="${event.dateTime}"></td>
+                            <td th:text="${event.address}"></td>
+                            <td th:text="${event.organizerName}"></td>
+                            <td th:text="${event.phone}"></td>
+                            <td th:text="${event.email}"></td>
+                            <td th:text="${event.ticketType}"></td>
+                            <td th:text="${event.ticketPrice}"></td>
+                            <td th:text="${event.ticketQuantity}"></td>
+                            <td th:text="${event.totalPrice}"></td>
+                            <td th:text="${event.paymentMethod}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
