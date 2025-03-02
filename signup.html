@@ -1,0 +1,203 @@
+<!-- event-registration.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+<link rel="shortcut icon"
+    href="https://cdn-icons-png.flaticon.com/512/2037/2037551.png">
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<title>Event Registration System</title>
+</head>
+
+<style>
+.navbar-brand {
+    color: white !important;
+    font-weight: bold;
+}
+
+label {
+    font-weight: 600;
+    color: rgb(50, 49, 49);
+    margin-bottom: 5px;
+}
+form{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+</style>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm navbar-light bg-success">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fa fa-calendar"
+                aria-hidden="true"></i> Event Registration System</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+
+            <!-- Display flash messages for success or error -->
+            <div th:if="${success}" class="alert alert-success mt-3 alert-dismissible fade show" role="alert">
+                <i class="fa fa-check-circle" aria-hidden="true"></i> <span
+                    th:text="${success}"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>    
+            </div>
+            
+            <div th:if="${error}" class="alert alert-danger mt-3 alert-dismissible fade show" role="alert">
+                <i class="fa fa-exclamation-circle" aria-hidden="true"></i> <span
+                    th:text="${error}"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>    
+            </div>
+
+            <div class="p-4 m-4">
+                <!-- Use Thymeleaf form tag and set action to point to the controller -->
+                <form th:action="@{/register}" method="post"
+                    class="form-control p-5">
+                    <h3 class="p-2 mb-5 text-center"
+                        style="font-weight: bold; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: green;">Register
+                        Your Event</h3>
+
+                    <!-- Event & User Information -->
+                    <div class="row g-3">
+                        <h6 class="p-1 text-success" style="font-weight: bold;">Event
+                            & User Information</h6>
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label>Event Name</label> <select
+                                    class="form-control form-select" name="eventName" required>
+                                    <option value="">Select an event</option>
+                                    <option value="Event 1">Event 1</option>
+                                    <option value="Event 2">Event 2</option>
+                                    <option value="Event 3">Event 3</option>
+                                    <option value="Event 4">Event 4</option>
+                                    <option value="Event 5">Event 5</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label><i class="fa fa-calendar" aria-hidden="true"></i>
+                                    Date and Time</label> <input type="datetime-local" class="form-control"
+                                    name="dateTime" required>
+                            </div>
+                            <div class="mb-3">
+                                <label><i class="fa fa-location-arrow"
+                                    aria-hidden="true"></i> Address</label>
+                                <textarea rows="1" class="form-control" name="address"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label><i class="fa fa-user" aria-hidden="true"></i>
+                                    Event Organizer Names</label> <input type="text" class="form-control"
+                                    name="organizerName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label><i class="fa fa-phone" aria-hidden="true"></i>
+                                    Phone Number</label> <input type="tel" class="form-control"
+                                    name="phone" required>
+                            </div>
+                            <div class="mb-3">
+                                <label><i class="fa fa-envelope" aria-hidden="true"></i>
+                                    Email</label> <input type="email" class="form-control" name="email"
+                                    required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ticket & Payment Information -->
+                    <div class="row g-3 mt-3">
+                        <h6 class="p-1 text-success" style="font-weight: bold;">Ticket
+                            & Payment Information</h6>
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label><i class="fa fa-ticket" aria-hidden="true"></i>
+                                    Ticket Type</label> <select class="form-control form-select"
+                                    id="ticketType" name="ticketType" required>
+                                    <option value="">Select Ticket</option>
+                                    <option value="vip">VIP</option>
+                                    <option value="general">General</option>
+                                    <option value="student">Student</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label>Ticket Price</label> <input type="number"
+                                    class="form-control" id="ticketPrice" name="ticketPrice"
+                                    readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label>Quantity</label> <input type="number"
+                                    class="form-control" id="ticketQuantity" name="ticketQuantity"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label>Total Price</label> <input type="number"
+                                    class="form-control" id="totalPrice" name="totalPrice" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label>Payment Method</label> <select
+                                    class="form-control form-select" name="paymentMethod" required>
+                                    <option value="">Select Payment Method</option>
+                                    <option value="creditcard">Credit Card</option>
+                                    <option value="debitcard">Debit card</option>
+                                    <option value="upi">UPI</option>
+                                    <option value="banking">Online Banking</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-success mt-3" type="submit">Book
+                        Event Slot</button>
+                </form>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Include your JavaScript logic for updating prices -->
+    <script>
+        const ticketPrices = {
+            "vip": 500,
+            "general": 300,
+            "student": 100
+        };
+
+        const ticketTypeSelect = document.getElementById("ticketType");
+        const ticketQuantityInput = document.getElementById("ticketQuantity");
+        const ticketPriceInput = document.getElementById("ticketPrice");
+        const totalPriceInput = document.getElementById("totalPrice");
+
+        function updatePrices() {
+            const ticketType = ticketTypeSelect.value;
+            const quantity = parseInt(ticketQuantityInput.value) || 0;
+
+            if (ticketType in ticketPrices) {
+                const ticketPrice = ticketPrices[ticketType];
+                ticketPriceInput.value = ticketPrice;
+            } else {
+                ticketPriceInput.value = "";
+            }
+
+            if (ticketPriceInput.value && quantity > 0) {
+                const total = quantity * parseInt(ticketPriceInput.value);
+                totalPriceInput.value = total;
+            } else {
+                totalPriceInput.value = "";
+            }
+        }
+
+        ticketTypeSelect.addEventListener("change", updatePrices);
+        ticketQuantityInput.addEventListener("input", updatePrices);
+    </script>
+</body>
+
+</html>
